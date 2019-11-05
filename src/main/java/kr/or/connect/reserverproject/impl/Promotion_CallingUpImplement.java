@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.connect.reserverproject.dao.File_InfoDao;
 import kr.or.connect.reserverproject.dao.Product_imageDao;
 import kr.or.connect.reserverproject.dao.PromotionDao;
+import kr.or.connect.reserverproject.dto.File_info;
 import kr.or.connect.reserverproject.dto.Product_image;
 import kr.or.connect.reserverproject.dto.Promotion;
 import kr.or.connect.reserverproject.service.Promotion_CallingUp_Service;
@@ -18,21 +19,13 @@ import kr.or.connect.reserverproject.service.Promotion_CallingUp_Service;
 public class Promotion_CallingUpImplement implements Promotion_CallingUp_Service {
 
 	@Autowired
-	PromotionDao promotiondao;
-	Promotion promotion = new Promotion();
-	
+	PromotionDao promotiondao;	
 	
 	@Autowired
 	Product_imageDao product_imagedao;
-	List<Integer> file_info = new ArrayList<Integer>();
-	
 	
 	@Autowired
 	File_InfoDao file_infodao;
-	List<String> path = new ArrayList<String>();
-	
-	
-	
 	
 	@Override
 	@Transactional
@@ -40,8 +33,7 @@ public class Promotion_CallingUpImplement implements Promotion_CallingUp_Service
 		// TODO Auto-generated method stub
 		List<Promotion> promotion_li = promotiondao.selectAll();
 		ArrayList<Integer> id_li=new ArrayList<Integer>();
-				
-	
+		
 		return promotion_li;
 	}
 
@@ -53,13 +45,12 @@ public class Promotion_CallingUpImplement implements Promotion_CallingUp_Service
 		product_image_li=product_imagedao.search_File_id(product_id,"th");
 	
 		return product_image_li;
-	
 	}
 
 	@Override
 	@Transactional
-	public List<String> getImage_Path(List<Integer> file_id) {
-		return path=file_infodao.path_Get(file_id);
+	public List<File_info> getImage_Path(List<Integer> file_id) {
+		return file_infodao.path_Get(file_id);
 	}
 
 }

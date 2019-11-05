@@ -24,9 +24,9 @@ public class File_InfoDao {
 	
 	
 	
-	public List<String> path_Get (List<Integer> file_id){
+	public List<File_info> path_Get (List<Integer> file_id){
 		List<String> path_li = new ArrayList<String>();
-		String sql = SELECT_IMG_PATH +" in (";
+		String sql = SELECT_FILE_INFO +" in (";
 		for(int i=0;i<file_id.size();i++) {
 			sql += file_id.get(i);
 			if(i!=file_id.size()-1) {
@@ -42,15 +42,7 @@ public class File_InfoDao {
 		file_info_li=jdbc.query(sql, rowMapper);
 		
 		
-		
-		
-		for(int j=0;j<file_info_li.size();j++) {
-			file_info=file_info_li.get(j);
-			path_li.add(file_info.getSave_file_name());
-		}
-		
-		
-		return path_li;
+		return file_info_li;
 	}
 
 }

@@ -20,10 +20,14 @@ public class GetCategory {
 	
 	@RequestMapping(method = RequestMethod.GET ,path = "/api/category")
 	public Object GetCategory() {
-		List<String> category=new ArrayList<String>();
-		category=category_Service.Category();
+		List<Category> inputList = new ArrayList<Category>();
+		List<String> categoryList=new ArrayList<String>();
+		inputList=category_Service.category();
+		for(int i=0;i<inputList.size();i++) {
+		categoryList.add(inputList.get(i).getName());
+		}
 		
-		return category;
+		return categoryList;
 	}
 
 }

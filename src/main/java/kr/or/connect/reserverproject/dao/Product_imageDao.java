@@ -38,7 +38,7 @@ public class Product_imageDao {
 		product_id+=")";
 		
 		//id_list , type
-		String sql = SELECT_FILE_ID+" in "+product_id+" and"+" type=\""+type+"\"";
+		String sql = SELECT_PRODUCT_IMAGE+" in "+product_id+" and"+" type=\""+type+"\"";
 		
 		
 		return jdbc.query(sql,rowMapper);

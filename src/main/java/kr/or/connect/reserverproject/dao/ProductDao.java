@@ -170,7 +170,7 @@ public class ProductDao {
 		List<Integer> new_id = new ArrayList<Integer>();
 		List<Product_image> input = new ArrayList<Product_image>();
 		RowMapper<Product_image> rowMapper = BeanPropertyRowMapper.newInstance(Product_image.class);
-		String sql =SELECT_FILE_ID+" in(";
+		String sql =SELECT_PRODUCT_IMAGE+" in(";
 		for(int i = 0;i<id_For_Image.size();i++) {
 			sql+=id_For_Image.get(i);
 			if(id_For_Image.size()-1!=i) {
@@ -187,7 +187,7 @@ public class ProductDao {
 	private void select_Product_FileInfo(List<List<String>>productList, List<Integer> id_For_Image) {
 		RowMapper<File_info> rowMapper = BeanPropertyRowMapper.newInstance(File_info.class);
 		List<File_info> input = new ArrayList<File_info>();
-		String sql=SELECT_IMG_PATH+" in(";
+		String sql=SELECT_FILE_INFO+" in(";
 		for(int i = 0;i<id_For_Image.size();i++) {
 			sql+=id_For_Image.get(i);
 			if(id_For_Image.size()-1!=i) {

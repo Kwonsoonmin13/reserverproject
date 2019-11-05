@@ -2,8 +2,8 @@ package kr.or.connect.reserverproject.dao;
 
 public class ReserverSql {
 	public static final String SELECT_PROMOTION = "SELECT * FROM promotion";
-	public static final String SELECT_FILE_ID = "SELECT * FROM product_image WHERE product_id" ;
-	public static final String SELECT_IMG_PATH ="SELECT * FROM file_info WHERE id";
+	public static final String SELECT_PRODUCT_IMAGE = "SELECT * FROM product_image WHERE product_id" ;
+	public static final String SELECT_FILE_INFO ="SELECT * FROM file_info WHERE id";
 	
 	public static final String SELECT_CATEGORY = "SELECT * FROM category";
 	

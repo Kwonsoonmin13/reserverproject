@@ -1,58 +1,57 @@
-var contents="";
 
-function promotion_regist(path_json) {
-	var slide = document.querySelector("#slied");
+
+function promotion_regist(slide,path_json) {
+	var contents="";
 	for(var i=0;i<path_json.length;i++){
 		contents=contents.concat("<li> <img src=\"http://localhost:8080/reserverproject/"+path_json[i]+"\" width=\"500px\"></li> ");
 	}	
 	contents=contents.concat("<li> <img src=\"http://localhost:8080/reserverproject/"+path_json[0]+"\" width=\"500px\"></li> ");
-	
+	slide.innerHTML=contents;
 }
 
-function promotion_play(){
-	var slide = document.querySelector("#slide");
+function promotion_play(slide,path_json){
 	var left =0;
+	var slide_width=10+(500*(path_json.length+1));
+	slide.style.width=slide_width+"px";
 	setInterval(() => {
 		slide.style.left=left+"px";
 		
 		left-=500;
-		if(left==-2500){
-			left=comeback_sl();
-			
+		if(left==-500*(path_json.length+1)){
+			left=comeback_slide();
 		}
-		
-		
 	}, 3000);
 }
 
-function comeback_sl (){
+function comeback_slide (){
 	var left = 0;
 	setTimeout(() => {
-		
 		slide.style.transition="0s";
 		slide.style.left=left+"px";
 	},  1000);
 	setTimeout(() => {
 		slide.style.transition="1s";
 	}, 2000);
-	
 	return left;
 }
-//id=\"cate0\" id=\"cate"+(i+1)+"\"
 
-var cate_con="<li><a  href=\"#\" style=\"color:green\" >전체리스트</a></li> ";
 
-function create_CategoryMenu(category_json){
-	var category = document.querySelector("#category");
+
+
+function create_CategoryMenu(category,category_json){
+	
+	var cate_con="<li><a  href=\"#\" style=\"color:green\" >전체리스트</a></li> ";
+
+	var center = 70*(category_json.length+1)/2
+	var slide_width =70*(category_json.length+1)+"px";
 	
 	for(var i=0;i<category_json.length;i++){
 		cate_con=cate_con.concat("<li><a   href=\"#\">"+category_json[i]+"</a></li> ");
 	}
-	var cent = 70*(category_json.length+1)/2
-	category.style.width=70*(category_json.length+1)+"px";
+
+	category.style.width=slide_width;
 	category.innerHTML=cate_con;
-	category.style.marginLeft="-"+cent+"px";
-	
+	category.style.marginLeft="-"+center+"px";
 }
 
 function regist_product_count(product_Count) {
@@ -114,15 +113,14 @@ function regist_product_List(reset,cate,start){
 	startstate+=4;
 }
 
-function thebogi(){
-	var more_b = document.querySelector("#more_b");
+function more_button(){
+	var more_button = document.querySelector("#more_b");
 	
-	more_b.addEventListener("click",function(){
+	more_button.addEventListener("click",function(){
 		regist_product_List(0,catestate,startstate);
 		if(startstate>=product_Count){
-			more_b.style.display="none";
+			more_button.style.display="none";
 		}
-		
 	});
 }
 
@@ -132,40 +130,27 @@ function thebogi(){
 
 var product_Count;
 document.addEventListener("DOMContentLoaded",function(){
-	var xhr = new XMLHttpRequest();
-	var xhr2 = new XMLHttpRequest();
+	var xhr_promotion= new XMLHttpRequest();
+	var xhr_category = new XMLHttpRequest();
 	var xhr3 = new XMLHttpRequest();
 	
-
-	var path_json;
-	var category_json;
-	
-	
-	xhr.addEventListener("load",function(){
+	xhr_promotion.addEventListener("load",function(){
+		var slide = document.querySelector("#slide");
+		var path_json;
+		path_json = JSON.parse(xhr_promotion.response);
 		
-		path_json = JSON.parse(xhr.response);
-		
-		
-		
-		
-		promotion_regist(path_json);
-		slide.innerHTML=contents;
-		promotion_play();
-		
-		
-		
-		
-		
-		
-		
+		promotion_regist(slide,path_json);
+		promotion_play(slide,path_json);
 	});
 	
-	xhr2.addEventListener("load",function(){
-		category_json= JSON.parse(xhr2.response);
+	xhr_category.addEventListener("load",function(){
+		var category_json;
+		var category = document.querySelector("#category");
 		
-		create_CategoryMenu(category_json);
+		category_json= JSON.parse(xhr_category.response);
 		
-		categoryclick_event();
+		create_CategoryMenu(category,category_json);
+		categoryclick_event(category);
 	});
 	
 	xhr3.addEventListener("load",function(){
@@ -175,19 +160,19 @@ document.addEventListener("DOMContentLoaded",function(){
 		
 		regist_product_List(1,catestate,startstate);
 		
-		thebogi();
+		more_button();
 	});
 	
 	var xhr4 = new XMLHttpRequest();
 	var product_List ;
 	
 
-	xhr.open("GET","./api/promotions");
-	xhr2.open("GET","./api/category");
+	xhr_promotion.open("GET","./api/promotions");
+	xhr_category.open("GET","./api/category");
 	xhr3.open("GET","./api/ProductCount/0");
 	
-	xhr.send();
-	xhr2.send();
+	xhr_promotion.send();
+	xhr_category.send();
 	xhr3.send();
 	
 	
@@ -197,56 +182,55 @@ document.addEventListener("DOMContentLoaded",function(){
 });
 
 
-function categoryclick_event(){
-var category = document.querySelector("#category");
-
+function categoryclick_event(category){
 category.addEventListener("click",function(e){
-	var more_b = document.querySelector("#more_b");
-	more_b.style.display="block"
-	
-	
-	console.log(e);
+	var more_button = document.querySelector("#more_b");
+	more_button.style.display="block"
+
 	if(e.target.nodeName=="A"){
 		for(var i=0;i<category.childElementCount;i++){
 			category.children[i].children[0].style.color="black";	
 		}
 		
-	console.log(e.target.innerText);
-	var category_col = e.target;
+	var category_color = e.target;
 	var categorytext = e.target.innerText;
 	var cateid=null;
 	switch(categorytext){
-	
 	case "전체리스트":
 		cateid=0;
 		catestate=0;
 		startstate=0;
-		category_col.style.color="green";
+		category_color.style.color="green";
 		break;
 	case "뮤지컬":
 		cateid=1;
 		catestate=1;
 		startstate=0;
-		category_col.style.color="green";
+		category_color.style.color="green";
 		break;
 	case "콘서트":
 		cateid=2;
 		catestate=2;
 		startstate=0;
-		category_col.style.color="green";
+		category_color.style.color="green";
 		break;
 	case "클래식":
 		cateid=3;
 		catestate=3;
 		startstate=0;
-		category_col.style.color="green";
+		category_color.style.color="green";
 		break;
 	case "연극":
 		cateid=4;
 		catestate=4;
 		startstate=0;
-		category_col.style.color="green";
+		category_color.style.color="green";
 		break;
+	case "전시":
+		cateid=5;
+		catestate=5;
+		startstate=0;
+		category_color.style.color="green";
 	default:
 		cateid=null;
 		break;

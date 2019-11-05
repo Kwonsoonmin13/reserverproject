@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.or.connect.reserverproject.dto.File_info;
 import kr.or.connect.reserverproject.dto.Product_image;
 import kr.or.connect.reserverproject.dto.Promotion;
 import kr.or.connect.reserverproject.service.Promotion_CallingUp_Service;
@@ -28,9 +29,12 @@ public class GetPromotion {
 		
 		List<Product_image> product_image_objects = new ArrayList<Product_image>();
 		Product_image product_image = new Product_image();
-		
 		List<Integer> file_id= new ArrayList<Integer>();
+		
+		List<File_info> file_infos = new ArrayList<File_info>();
+		File_info file_info = new File_info();
 		List<String> image_path = new ArrayList<String>();
+		
 		
 		promotion_li=promotion_Service.getPromotionId();
 		for(int i=0;i<promotion_li.size();i++) {
@@ -44,7 +48,12 @@ public class GetPromotion {
 			file_id.add(product_image.getFile_id());
 		}
 		
-		image_path=promotion_Service.getImage_Path(file_id);
+		file_infos=promotion_Service.getImage_Path(file_id);
+		for(int j=0;j<file_infos.size();j++) {
+		file_info=file_infos.get(j);
+		image_path.add(file_info.getSave_file_name());
+		}
+		
 		return image_path;
 	}
 	

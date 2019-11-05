@@ -24,14 +24,15 @@ public class CategoryDao {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
 	
-	public List<String> Select_Category(){
+	public List<Category> Select_Category(){
 		List<Category>input_list = new ArrayList<Category>();
 		List<String> categoryList = new ArrayList<String>();
+		
 		input_list=jdbc.query(SELECT_CATEGORY, rowMapper);
-		for(int i=0;i<input_list.size();i++) {
+		/*for(int i=0;i<input_list.size();i++) {
 			categoryList.add(input_list.get(i).getName());
-		}
-		return categoryList;
+		}*/
+		return input_list;
 	}
 	
 }
