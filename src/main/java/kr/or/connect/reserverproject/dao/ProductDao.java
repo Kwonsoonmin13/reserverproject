@@ -47,10 +47,10 @@ public class ProductDao {
 		productList.add(product2);
 		productList.add(product3);
 		
-		int db_ca_id =0;
+		int db_category_id =0;
 		if(category!=0) {
-			db_ca_id=get_Ca_DbId(category);
-			product_Select_Cate(productList, start, db_ca_id, product_Id);
+			db_category_id=get_Category_DbId(category);
+			product_Select_Cate(productList, start, db_category_id, product_Id);
 			
 			id_for_image=select_product_image(product_Id);
 			select_Product_FileInfo(productList,id_for_image);
@@ -79,13 +79,13 @@ public class ProductDao {
 		Map<String,Integer> params = new HashMap<String, Integer>();			
 		List<Count> count_in = new ArrayList<Count>();
 		
-		
+		//category 0 => 전 카테고리 품목을 가져오는 것
 		if(category!=0) {
-			int db_ca_id=0;
-			db_ca_id=get_Ca_DbId(category);
+			int db_category_id=0;
+			db_category_id=get_Category_DbId(category);
 			
 			
-			params.put("category_id", db_ca_id);
+			params.put("category_id", db_category_id);
 			count_in=jdbc.query(PRODUCT_COUNT_WI_ID,params, rowMapperCount);
 		}
 		else {
@@ -102,9 +102,9 @@ public class ProductDao {
 	
 	
 	
-	private int get_Ca_DbId(int category){
+	private int get_Category_DbId(int category){
 		RowMapper<Category_id> rowMapperCa_Id = BeanPropertyRowMapper.newInstance(Category_id.class);
-		List<Category_id> category_id = new ArrayList<Category_id>();
+		List<Category_id> category_DbId = new ArrayList<Category_id>();
 		Map<String,String> params = new HashMap<String,String>();
 		String in_cate="";
 		switch (category) {			
@@ -119,14 +119,17 @@ public class ProductDao {
 			break;
 		case 4:
 			in_cate="연극";
+			break;
+		case 5:
+			in_cate="전시";
 
 		default:
 			break;
 		}
 		params.put("category",in_cate);
-		category_id=jdbc.query(SEARCH_CA_ID,params,rowMapperCa_Id);
+		category_DbId=jdbc.query(SEARCH_CA_ID,params,rowMapperCa_Id);
 		
-		return category_id.get(0).getId();
+		return category_DbId.get(0).getId();
 	}
 	
 	

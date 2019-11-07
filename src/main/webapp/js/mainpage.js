@@ -54,7 +54,7 @@ function create_CategoryMenu(category,category_json){
 	category.style.marginLeft="-"+center+"px";
 }
 
-function regist_product_count(product_Count) {
+function regist_product_count() {
 	var count_align = document.querySelector("#count_align");
 	count_align.innerHTML=
 		"<span>바로 예매 가능한 행사가</span>"+
@@ -62,13 +62,12 @@ function regist_product_count(product_Count) {
 		"<span>있습니다.</span>";
 }
 
-var catestate = 0;
-var startstate =0;
-function regist_product_List(reset,cate,start){
+
+function regist_product_List(reset){
 	var xhr = new XMLHttpRequest();
 	var product_List;
 	var url = "./api/ProductList/";
-	xhr.open("GET",url+cate+"/"+start);
+	xhr.open("GET",url+catestate+"/"+startstate);
 	xhr.send();
     xhr.addEventListener("load",function(){
     	
@@ -129,10 +128,13 @@ function more_button(){
 
 
 var product_Count;
+var catestate = 0;
+var startstate =0;
 document.addEventListener("DOMContentLoaded",function(){
 	var xhr_promotion= new XMLHttpRequest();
 	var xhr_category = new XMLHttpRequest();
 	var xhr3 = new XMLHttpRequest();
+	
 	
 	xhr_promotion.addEventListener("load",function(){
 		var slide = document.querySelector("#slide");
@@ -154,11 +156,12 @@ document.addEventListener("DOMContentLoaded",function(){
 	});
 	
 	xhr3.addEventListener("load",function(){
+		
 		product_Count= xhr3.response;
 		
-		regist_product_count(product_Count);
+		regist_product_count();
 		
-		regist_product_List(1,catestate,startstate);
+		regist_product_List(1);
 		
 		more_button();
 	});
@@ -231,6 +234,7 @@ category.addEventListener("click",function(e){
 		catestate=5;
 		startstate=0;
 		category_color.style.color="green";
+		break;
 	default:
 		cateid=null;
 		break;
@@ -240,12 +244,12 @@ category.addEventListener("click",function(e){
 		var url ="./api/ProductCount/"+cateid
 		xhr.addEventListener("load",function(){
 			product_Count=xhr.response;
-			regist_product_count(product_Count);	
+			regist_product_count();	
 		});
 		xhr.open("GET",url);
 		xhr.send();
 		
-		 regist_product_List(1,catestate,startstate);
+		 regist_product_List(1);
 		}
 	
 	}
