@@ -147,7 +147,8 @@ public class ProductDao {
 		Map<String, Integer>param = new HashMap<String, Integer>();
 		param.put("start", start);
 		db_product=jdbc.query(SELECT_PRODUCT_TOTAL,param, rowMapper);
-		for(int i=0;i<4;i++) {
+		for(int i=0;i<db_product.size();i++) {
+			productList.get(i).add(String.valueOf(db_product.get(i).getId()));
 			productList.get(i).add(db_product.get(i).getDescription());
 			productList.get(i).add(db_product.get(i).getContent());
 			id_For_Image.add(db_product.get(i).getId());
@@ -161,6 +162,7 @@ public class ProductDao {
 		param.put("start", start);
 		db_product=jdbc.query(SELECT_PRODUCT_WI_ID,param,rowMapper);
 		for(int i=0;i<db_product.size();i++) {
+			productList.get(i).add(String.valueOf(db_product.get(i).getId()));
 			productList.get(i).add(db_product.get(i).getDescription());
 			productList.get(i).add(db_product.get(i).getContent());
 			id_For_Image.add(db_product.get(i).getId());

@@ -87,20 +87,20 @@ function regist_product_List(reset){
 			
 			if(i%2==0){
 			content_li.innerHTML+=
-			"<li class=\"content\">"+
-			"<img class=\"content_img\" src=\"http://localhost:8080/reserverproject"+"/"+product_List[i][2]+"\">"+
-			"<div class=\"short\"><span>"+product_List[i][0]+"</span></div>"+
-			"<div class=\"spot\"><span>"+product_List[i][3]+"</span></div>"+
-			"<div class=\"long\"><span>"+product_List[i][1]+"</span></div></li>";
+			"<li class=\"content\" id=\""+product_List[i][0]+"\">"+
+			"<img class=\"content_img\" src=\"http://localhost:8080/reserverproject"+"/"+product_List[i][3]+"\">"+
+			"<div class=\"short\"><span>"+product_List[i][1]+"</span></div>"+
+			"<div class=\"spot\"><span>"+product_List[i][4]+"</span></div>"+
+			"<div class=\"long\"><span>"+product_List[i][2]+"</span></div></li>";
 		
 			}		
 			else{
 				content_li2.innerHTML+=
-				"<li class=\"content\">"+
-				"<img class=\"content_img\" src=\"http://localhost:8080/reserverproject/"+product_List[i][2]+"\">"+
-				"<div class=\"short\"><span>"+product_List[i][0]+"</span></div>"+
-				"<div class=\"spot\"><span>"+product_List[i][3]+"</span></div>"+
-				"<div class=\"long\"><span>"+product_List[i][1]+"</span></div></li>";
+				"<li class=\"content\" id=\""+product_List[i][0]+"\">"+
+				"<img class=\"content_img\" src=\"http://localhost:8080/reserverproject/"+product_List[i][3]+"\">"+
+				"<div class=\"short\"><span>"+product_List[i][1]+"</span></div>"+
+				"<div class=\"spot\"><span>"+product_List[i][4]+"</span></div>"+
+				"<div class=\"long\"><span>"+product_List[i][2]+"</span></div></li>";
 			}
 			
 		}
@@ -111,6 +111,24 @@ function regist_product_List(reset){
 	
 	startstate+=4;
 }
+
+function regist_product_listener(){
+	var contents = document.querySelector("#content_lay");
+	
+	contents.addEventListener("click",function(e){
+		var con_obj = e.path;
+	
+		for(var i =0;i<e.path.length;i++){
+			if ( con_obj[i].className =="content" ){
+				var content = con_obj[i];
+				//content.id
+			}
+		}
+	});
+
+	
+}
+
 
 function more_button(){
 	var more_button = document.querySelector("#more_b");
@@ -163,6 +181,8 @@ document.addEventListener("DOMContentLoaded",function(){
 		
 		regist_product_List(1);
 		
+		regist_product_listener();
+		
 		more_button();
 	});
 	
@@ -177,6 +197,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	xhr_promotion.send();
 	xhr_category.send();
 	xhr3.send();
+	
 	
 	
 	

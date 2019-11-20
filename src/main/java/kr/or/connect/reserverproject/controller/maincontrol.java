@@ -13,13 +13,10 @@ import kr.or.connect.reserverproject.service.Promotion_CallingUp_Service;
 
 @Controller
 public class maincontrol {
-	
-	@Autowired
-	Promotion_CallingUp_Service promotionService;
-	
+
 	
 @GetMapping(path="/mainpage")
-public String getmainpage(ModelMap map) {
+public String getmainpage() {
 	return "mainpage";
 }
 
