@@ -117,16 +117,13 @@ function regist_product_listener(){
 	
 	contents.addEventListener("click",function(e){
 		var con_obj = e.path;
-	
 		for(var i =0;i<e.path.length;i++){
 			if ( con_obj[i].className =="content" ){
-				var content = con_obj[i];
-				//content.id
+				var content = con_obj[i]; 
+				location.href ="http://localhost:8080/reserverproject/detailpage/"+content.id
 			}
 		}
 	});
-
-	
 }
 
 

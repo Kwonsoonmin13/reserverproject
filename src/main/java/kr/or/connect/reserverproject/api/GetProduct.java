@@ -27,7 +27,6 @@ public class GetProduct {
 	
 	@RequestMapping(method = RequestMethod.GET,path = "/api/ProductList/{category}/{start}")
 	public List<List<String>> get_Product_List(@PathVariable(name = "category")int category, @PathVariable(name = "start")int start) {
-		
 		return product_Service.Get_Product_List(category, start);
 	}
 }

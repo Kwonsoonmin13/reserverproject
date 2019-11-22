@@ -32,8 +32,49 @@ public class ProductDao {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
 	
-	public List<List<String>> get_Product(int category,int start) {
+	public int get_Category_DbId(int category){
+		RowMapper<Category_id> rowMapperCa_Id = BeanPropertyRowMapper.newInstance(Category_id.class);
+		List<Category_id> category_DbId = new ArrayList<Category_id>();
+		Map<String,String> params = new HashMap<String,String>();
+		String in_cate="";
+		switch (category) {			
+		case 1:
+			in_cate="뮤지컬";
+			break;
+		case 2:
+			in_cate="콘서트";
+			break;
+		case 3:
+			in_cate="클래식";
+			break;
+		case 4:
+			in_cate="연극";
+			break;
+		case 5:
+			in_cate="전시";
+
+		default:
+			break;
+		}
+		params.put("category",in_cate);
+		category_DbId=jdbc.query(SEARCH_CA_ID,params,rowMapperCa_Id);
 		
+		return category_DbId.get(0).getId();
+	}
+	public void get_Product(int category,int start){
+		
+	}
+
+	
+	
+	//public List<List<String>> get_Product(int category,int start) {
+	
+		//카테고리인지 아닌지 분류
+		//시작이 어디서 부터인지
+		//카테고리 db검색을 마치고 컨트롤러 영역까지 끌고온다. -> 임플리먼트 영역까지 끌어올림 마침
+		//프로덕트를 검색하고 컨트롤러 영역까지 끌고온다. 
+		//컨트롤러에서 데이터를 정제한다. 이후 보낸다.
+		/*
 		List<List<String>> productList=new ArrayList<List<String>>();
 		List<Integer>product_Id = new ArrayList<Integer>();
 		List<Integer>id_for_image = new ArrayList<Integer>();
@@ -102,36 +143,7 @@ public class ProductDao {
 	
 	
 	
-	private int get_Category_DbId(int category){
-		RowMapper<Category_id> rowMapperCa_Id = BeanPropertyRowMapper.newInstance(Category_id.class);
-		List<Category_id> category_DbId = new ArrayList<Category_id>();
-		Map<String,String> params = new HashMap<String,String>();
-		String in_cate="";
-		switch (category) {			
-		case 1:
-			in_cate="뮤지컬";
-			break;
-		case 2:
-			in_cate="콘서트";
-			break;
-		case 3:
-			in_cate="클래식";
-			break;
-		case 4:
-			in_cate="연극";
-			break;
-		case 5:
-			in_cate="전시";
-
-		default:
-			break;
-		}
-		params.put("category",in_cate);
-		category_DbId=jdbc.query(SEARCH_CA_ID,params,rowMapperCa_Id);
 		
-		return category_DbId.get(0).getId();
-	}
-	
 	
 	
 	
@@ -232,8 +244,9 @@ public class ProductDao {
 		
 		for(int i=0;i<input.size();i++) {
 			productList.get(i).add(input.get(i).getPlace_name());
-		}
+		}*/
 	}
+	
 	
 
 }

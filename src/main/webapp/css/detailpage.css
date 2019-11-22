@@ -1,0 +1,149 @@
+@charset "UTF-8";             
+			body{
+				border: solid 0.1px black;
+   				width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #top{
+                height: 500px;
+                display: block;
+                position: relative;
+            }
+            #icon{
+                margin-top :10px;
+                position : absolute;
+            }
+            #email{
+                margin-top :10px;
+                color:white;
+                position: absolute;
+                right: 0px;
+            }
+            #imgcount{
+                left:250px;
+                top:100px;
+                margin-left: -30px;
+                width :60px;
+                height: 20px;
+                background-color: black;
+                position: absolute;
+                opacity: 0.3;
+                border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+                text-align: center;
+            }
+            #front{
+                color: white;
+            }
+            #back{
+                color : dimgray
+            }
+            #slide{
+                filter: brightness(50%);
+                -webkit-filter: brightness(50%);
+            }
+            #title{
+                position: absolute;
+                color: white;
+                text-align: center;
+                width : 450px;
+                top: 200px;
+                font-size: 50px;
+                left: 250px;
+                margin-left: -225px;
+                
+            }
+           
+            #topimage{
+                width:500px;
+                height:500px;
+                position:absolute;
+            }
+            #summarycon{
+                clear: both;
+                position: relative;
+                width:500px;
+                display: -webkit-box;
+                text-overflow:ellipsis;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+            }
+            #sumbutton{
+                width:490px;
+                text-align: center;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                background-color: lightgrey;
+                margin-top: 5px;
+                margin-left: 5px;
+                
+            }
+            #event{
+                width:500px;
+                margin-top: 5px;
+            }
+            #reservebut{
+                margin-top: 5px;
+                width:490px;
+                color: white;
+                margin-left: 5px;
+                background-color: #02C018;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                text-align: center;
+            }
+            #commenthead{
+                width: 500px;
+            }
+            #score_count{
+                overflow: hidden;
+            }
+            #total_score{
+                float: left;
+            }
+            #count{
+                float: right;
+            }
+            .comment{
+                margin-top: 5px;
+                display: inline-block;
+            }
+            #comment_but{
+                width: 490px;
+                margin-left: 5px;;
+                text-align: center;
+                background-color: lightgray;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                margin-top: 5px;
+            }
+            #detail{
+                width: 500px;
+                display: inline-block;
+            }
+            #detail_but{
+                width: 246px;
+                text-align: center;
+                float: left;
+            }
+            #come_but{
+                width: 246px;
+                text-align: center;
+                float: left;
+            }
+            #find_navi{
+                width: 500px;
+                display: inline-block;
+            }
+            #find_but{
+                width :247px;
+                float: left;
+                text-align: center;
+                background-color: lightgray;
+            }
+            #navi_but{
+                width: 247px;
+                float: left;
+                text-align: center;
+                background-color: lightgray;
+            }
